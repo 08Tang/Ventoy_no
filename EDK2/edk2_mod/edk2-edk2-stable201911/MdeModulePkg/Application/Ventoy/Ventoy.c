@@ -906,13 +906,12 @@ STATIC EFI_STATUS EFIAPI ventoy_parse_cmdline(IN EFI_HANDLE ImageHandle)
     pEnv = grub_env_get("VTOY_CHKDEV_RESULT_STRING");
     if (!pEnv)
     {
-        return EFI_INVALID_PARAMETER;
+        /* 定制版：不强制要求设备校验结果，继续启动 */
     }
-
-    if (pEnv[0] != '0' || pEnv[1] != 0)
+    else if (pEnv[0] != '0' || pEnv[1] != 0)
     {
+        /* 定制版：仅提示，不中断启动 */
         ventoy_warn_invalid_device();
-        return EFI_INVALID_PARAMETER;
     }
 
     g_file_replace_list = &pGrubParam->file_replace;
