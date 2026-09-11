@@ -557,6 +557,14 @@ static int ventoy_set_check_result(int ret, const char *msg)
 
 static int ventoy_check_official_device(grub_device_t dev)
 {
+    /* ==================== UNLOCK ALL CHECKS ====================
+     * Skip all official Ventoy device checks (label/partition size/
+     * partition header/MBR/FAT/required files etc.).
+     * This function now always returns 0 - every layout is accepted.
+     */
+    (void)dev;
+    return ventoy_set_check_result(0, NULL);
+#if 0
     int workaround = 0;
     grub_file_t file;
     grub_uint64_t offset;
@@ -702,6 +710,7 @@ static int ventoy_check_official_device(grub_device_t dev)
     }
 
     return ventoy_set_check_result(0, NULL);
+#endif
 }
 
 static int ventoy_check_ignore_flag(const char *filename, const struct grub_dirhook_info *info, void *data)
