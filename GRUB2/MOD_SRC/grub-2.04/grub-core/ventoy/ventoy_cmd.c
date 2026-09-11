@@ -555,7 +555,7 @@ static int ventoy_set_check_result(int ret, const char *msg)
     return ret;
 }
 
-static int ventoy_check_official_device(grub_device_t dev)
+static int __attribute__((unused)) ventoy_check_official_device(grub_device_t dev)
 {
     int workaround = 0;
     grub_file_t file;
