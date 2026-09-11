@@ -71,8 +71,8 @@ sh buildedk.sh >> $LOG 2>&1 || exit 1
 cd $VTOY_PATH/INSTALL
 
 if [ "$1" = "CI" ]; then
-    Ver=$(date +%m%d%H%M)
-    sed "s/VENTOY_VERSION=.*/VENTOY_VERSION=\"$Ver\"/"  -i ./grub/grub.cfg
+    # 固定版本号：不随构建时间覆盖，直接沿用 grub.cfg 中配置的 VENTOY_VERSION
+    Ver=$(grep '^set VENTOY_VERSION=' ./grub/grub.cfg | sed 's/.*="\(.*\)".*/\1/')
 fi
 
 cilog "packing ventoy-$Ver ..."

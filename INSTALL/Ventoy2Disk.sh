@@ -26,7 +26,7 @@ echo ''
 echo '**********************************************'
 echo "      Ventoy: $curver  $TOOLDIR"
 echo "      longpanda admin@ventoy.net"
-echo "      https://www.ventoy.net"
+echo "      https://clccv.com"
 echo '**********************************************'
 echo ''
 
