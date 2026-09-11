@@ -52,14 +52,12 @@
 
 GRUB_MOD_LICENSE ("GPLv3+");
 
-#if 0
 static grub_uint8_t g_check_mbr_data[] = {
     0xEB, 0x63, 0x90, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
     0x56, 0x54, 0x00, 0x47, 0x65, 0x00, 0x48, 0x44, 0x00, 0x52, 0x64, 0x00, 0x20, 0x45, 0x72, 0x0D,
 };
-#endif
 
 initrd_info *g_initrd_img_list = NULL;
 initrd_info *g_initrd_img_tail = NULL;
@@ -559,14 +557,6 @@ static int ventoy_set_check_result(int ret, const char *msg)
 
 static int ventoy_check_official_device(grub_device_t dev)
 {
-    /* ==================== UNLOCK ALL CHECKS ====================
-     * Skip all official Ventoy device checks (label/partition size/
-     * partition header/MBR/FAT/required files etc.).
-     * This function now always returns 0 - every layout is accepted.
-     */
-    (void)dev;
-    return ventoy_set_check_result(0, NULL);
-#if 0
     int workaround = 0;
     grub_file_t file;
     grub_uint64_t offset;
@@ -712,7 +702,6 @@ static int ventoy_check_official_device(grub_device_t dev)
     }
 
     return ventoy_set_check_result(0, NULL);
-#endif
 }
 
 static int ventoy_check_ignore_flag(const char *filename, const struct grub_dirhook_info *info, void *data)
