@@ -557,6 +557,12 @@ static int ventoy_set_check_result(int ret, const char *msg)
 
 static int ventoy_check_official_device(grub_device_t dev)
 {
+    (void)dev;
+    /* UNLOCK: skip official Ventoy device validation.
+     * Removes: VTOYEFI label req, 32MB/adjacency req, 2048 LBA start,
+     *          FAT-only req, and MBR magic check.
+     * Partition info is still filled by ventoy_load_part_table(). */
+    return ventoy_set_check_result(0, NULL);
     int workaround = 0;
     grub_file_t file;
     grub_uint64_t offset;
